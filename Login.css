@@ -1,0 +1,108 @@
+body{
+    margin: 0;
+    background-image: url(photos/Background.png.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    animation-delay: 1s;
+    opacity: 0; 
+    animation: fadeIn 0.3s ease 0.1s forwards;
+    scroll-behavior: smooth ;
+    
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.back-container{
+    position: relative;
+
+}
+
+#Back-Button{
+    position: relative;
+    width: clamp(7%, 10%, 20%);
+    
+
+}
+
+.Login-Container{
+    padding: 15px;
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    left: 26.5%;
+    margin: 8.5%;
+    background-color: rgb(3, 47, 21);
+    width: 30%;
+    height: 68vh;
+    border-radius: 25px;
+}
+
+#Profile{
+    position: absolute;
+    top: 5%;
+    left: 37%;
+    width: 25%;
+}
+
+#E-System{
+    position: absolute;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 5%;
+    color: beige;
+    top: clamp(10%, 20%, 35%);
+    left: clamp(15%, 26%, 30%);
+    
+}
+
+#Email{
+    position: absolute;
+    top: clamp(25%, 35%, 50%);
+    left: clamp(5%, 7%, 15%);
+    right: clamp(5%, 7%, 15%);
+    width: clamp(60%, 77%, 85%);
+    height: clamp(1%, 2%, 10%);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(243, 243, 227);
+
+}
+
+#Password{
+    position: absolute;
+    top: clamp(45%, 49%, 60%);
+    left: clamp(5%, 7%, 15%);
+    width: clamp(60%, 77%, 85%);
+    height: clamp(1%, 2%, 10%);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(243, 243, 227);
+
+
+}
+
+#submit-button{
+    position: absolute;
+    background-color: beige;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    top: clamp(55%, 70%, 80%);
+    left: clamp(15%, 36%, 50%);
+    width: clamp(19%, 25%, 35%);
+    height: clamp(7%, 10%, 17%);
+    border-radius: 10px;
+    box-shadow: 3px 6px black;
+    
+}
+
+#submit-button:hover{
+    cursor: pointer;
+    border: 2px solid white;
+    background-color: rgb(226, 217, 176);
+}

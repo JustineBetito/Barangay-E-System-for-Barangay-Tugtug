@@ -1,0 +1,192 @@
+body{
+    margin: 0;
+    background-image: url(photos/Background.png.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-delay: 1s;
+    opacity: 0; 
+    animation: fadeIn 0.3s ease 0.1s forwards;
+    scroll-behavior: smooth ;
+    
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.navigation_container{
+    padding: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    text-wrap: wrap;
+
+}
+
+.Logo-container{
+    display: flex;
+    margin-left: 3%;
+    gap: 18%;
+
+}
+
+.Logo{
+    width: 80px;
+    height: auto;
+    
+}
+
+.Logo-name{
+    margin-top: 2%;
+    width: 20%;
+    text-decoration: none;
+    font-size: 90%;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    font-size: 100%;
+    color: rgb(3, 47, 21);
+
+}
+
+.Button-container{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    gap: 25px;
+    margin-left: clamp(20%, 20%, 20%);
+    margin-right: 5%;
+    text-wrap: wrap;
+
+}       
+
+button{
+    border: transparent;
+    background-color: transparent;
+    color: black;
+    font-family: Verdana;
+    height: 30px;
+    width:100px;
+    border-radius: 5px;
+    transition: width 0.5s, border-color 0.2s;
+    font-size: 13px;
+    letter-spacing: 10%;
+    text-wrap: wrap;
+    font-size: 90%;
+
+}
+
+button:hover{
+    cursor: pointer;
+    border: 2px solid rgb(3, 47, 21);
+    width:110px;
+}
+
+
+
+
+
+
+.Container{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 15%;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    
+
+}
+
+.Staff-Container{
+    color: rgb(205, 205, 181);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(3, 47, 21);
+    padding: 2% 1%;
+    width: clamp(25%, 28%, 40%);
+    box-shadow: 7px 7px rgba(0, 0, 0, 0.564);
+    border-radius: 20px;
+    flex-direction: column;
+    padding-top: 0;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-variant: small-caps;
+    min-height: 50vh;
+    height: 75vh;
+    
+}
+
+.Staff-Logo{
+    margin-top: clamp(1%, 1%, 20%);
+    width: 40%;
+    position: static;
+}
+
+#Staff{
+    position: relative;
+}
+
+.Staff-List{
+    font-size: clamp(2px, 17px, 30px);
+    line-height: 1.6;
+    padding-left: 1.2em;
+}
+
+.Staff-Container:hover{
+    cursor: pointer; 
+    transform: translateY(-10px);
+    box-shadow: 12px 12px rgba(0, 0, 0, 0.4);
+    background-color: rgb(14, 100, 44);
+}
+
+
+.Resident-Container{
+    color: rgb(205, 205, 181);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(3, 47, 21);
+    padding: 3.2% 1%;
+    padding-bottom: 3.2%;
+    width: clamp(25%, 28%, 40%);
+    box-shadow: 7px 7px rgba(0, 0, 0, 0.564);
+    border-radius: 20px;
+    flex-direction: column;
+    padding-top: 0;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-variant: small-caps;
+    min-height: 50vh;
+    height: 72vh;
+}
+
+.Resident-Logo{
+    margin-top: clamp(2%, 6%, 20%);
+    width: 47.5%;
+    position: static;
+}
+
+#Resident{
+    position: relative;
+}
+
+.Resident-List{
+    font-size: clamp(2px, 17px, 30px);
+    line-height: 1.6;
+    padding-left: 1.2em;
+}
+
+.Resident-Container:hover{
+    cursor: pointer; 
+    transform: translateY(-10px); /* Lifts the card up slightly */
+    box-shadow: 12px 12px rgba(0, 0, 0, 0.4); /* Makes the shadow deeper */
+    background-color: rgb(14, 100, 44);
+}
+
+
