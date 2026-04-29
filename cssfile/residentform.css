@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-image: url(../photos/Background.png.png);
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     animation-delay: 1s;
@@ -24,6 +25,46 @@ body.fade-out {
     --border-color: #d1d5db;
     --bg-color: #fcfaf7;
     --text-muted: #6b7280;
+}
+
+.btn-back{
+    position: absolute;
+    left: 2vw;
+    width: 9vw;
+    height: 4vh;
+    top: 4vh;
+    background-color: transparent;
+    border: none;
+    transition: 0.1s ease-in-out 0.1s;
+}
+
+.btn-back:hover{
+    width: 8vw;
+    transition: 0.1s ease-in-out 0.1s;
+}
+
+.backbutton{
+    position: relative;
+    top: 0.3vh;
+    transition: 0.1s ease-in-out 0.1s;
+}
+
+.btn-back:hover .backbutton{
+    width: 3vh;
+    transition: 0.1s ease-in-out 0.1s;
+}
+
+.back{
+    position: relative;
+    top: 0vh;
+    left: 0vw;
+    font-size: 3vh;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.btn-back:hover .back{
+    font-size: 3.2vh;
 }
 
 .form-container {
@@ -150,37 +191,45 @@ input[type="date"] {
     font-size: 0.85rem;
 }
 
-.tracking-container{
-    position: relative;
-    bottom: 121.4vh;
-    left: 79vw;
-    width: 19.3vw;
-    height: 23vh;
+
+
+/* tracking part */
+
+/* .tracking-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    padding: 20px;
     background-color: #fcfaf7;
-    border-radius: 5px;
-}
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;    
+} */
 
-.track-word{
-    position: absolute;
-    top: -4%;
-    left: 12.5%;
-    white-space: nowrap;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Remove absolute positioning from children to let them flow naturally inside the box */
+/* .track-word {
+    margin: 0 0 15px 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     color: #1e293b;
-    font-size: 3vh;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
 }
 
-.ref-word{
-    position: absolute;
-    top: 40%;
-    left: 8%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.ref-word {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #374151;
+    text-transform: uppercase;
 }
 
-.ref-number{
-    position: absolute;
-    top: 53%;
-    left: 7%;
-    width: 75%;
-}
-
+.ref-number {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-sizing: border-box; 
+} */

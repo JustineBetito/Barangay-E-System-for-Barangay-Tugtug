@@ -519,7 +519,7 @@ body.fade-out {
 
 .filter-select {
     position: relative;
-    left: 2vh;
+    left: 6vh;
     background: #f3efe8;
     border: none;
     border-radius: 5px;
@@ -533,8 +533,8 @@ body.fade-out {
 /* Button */
 .btn-display {
     position: relative;
-    left: 2vh;
-    width: 6vw;
+    left: 6vh;
+    width: clamp(2vw, 7vw, 7vw);
     background: #7d9e3b;
     color: white;
     border: none;
@@ -589,3 +589,4 @@ body.fade-out {
     background: #a4c45a;
     transform: translateY(-1px);
 }
+

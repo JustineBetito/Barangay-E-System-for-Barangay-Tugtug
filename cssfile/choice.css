@@ -2,6 +2,7 @@ body{
     margin: 0;
     background-image: url(../photos/Background.png.png);
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
     animation-delay: 1s;
     opacity: 0; 
@@ -120,6 +121,7 @@ button:hover{
     font-variant: small-caps;
     min-height: 50vh;
     height: 75vh;
+    transition: 0.1s ease-in-out 0.1s;
     
 }
 
@@ -164,6 +166,7 @@ button:hover{
     font-variant: small-caps;
     min-height: 50vh;
     height: 72vh;
+    transition: 0.1s ease-in-out 0.1s;
 }
 
 .Resident-Logo{

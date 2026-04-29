@@ -2,6 +2,7 @@ body{
     margin: 0;
     background-image: url(../photos/Background.png.png);
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
     animation-delay: 1s;
     opacity: 0; 
@@ -19,22 +20,45 @@ body.fade-out {
     transition: opacity 0.5s ease;
 }
 
+.btn-back{
+    position: absolute;
+    left: 2vw;
+    width: 9vw;
+    height: 4vh;
+    top: 4vh;
+    background-color: transparent;
+    border: none;
+    transition: 0.1s ease-in-out 0.1s;
+}
 
-.back-word{
+.btn-back:hover{
+    width: 8vw;
+    transition: 0.1s ease-in-out 0.1s;
+}
+
+.backbutton{
     position: relative;
-    top: 1%;
-    left: 1%;
-    text-decoration: none;
-    color: antiquewhite;
-    font-family: Arial, Helvetica, sans-serif;
-    font-variant: small-caps;
+    top: 0.3vh;
+    transition: 0.1s ease-in-out 0.1s;
 }
 
-.back-word:hover{
-    font-size: 17px;
-    color: white;
+.btn-back:hover .backbutton{
+    width: 3vh;
+    transition: 0.1s ease-in-out 0.1s;
 }
 
+.back{
+    position: relative;
+    top: 0vh;
+    left: 0vw;
+    font-size: 3vh;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+.btn-back:hover .back{
+    font-size: 3.2vh;
+}
 
 .Login-Container{
     padding: 15px;
