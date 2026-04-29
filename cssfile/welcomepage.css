@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-image: url(photos/Background.png.png);
+    background-image: url(../photos/Background.png.png);
     background-repeat: no-repeat;
     background-size: cover;
     animation-delay: 1s;
