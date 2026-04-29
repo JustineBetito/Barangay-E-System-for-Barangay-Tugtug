@@ -149,3 +149,38 @@ input[type="date"] {
     text-transform: uppercase;
     font-size: 0.85rem;
 }
+
+.tracking-container{
+    position: relative;
+    bottom: 121.4vh;
+    left: 79vw;
+    width: 19.3vw;
+    height: 23vh;
+    background-color: #fcfaf7;
+    border-radius: 5px;
+}
+
+.track-word{
+    position: absolute;
+    top: -4%;
+    left: 12.5%;
+    white-space: nowrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+    font-size: 3vh;
+}
+
+.ref-word{
+    position: absolute;
+    top: 40%;
+    left: 8%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ref-number{
+    position: absolute;
+    top: 53%;
+    left: 7%;
+    width: 75%;
+}
+

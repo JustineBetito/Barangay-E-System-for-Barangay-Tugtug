@@ -3,6 +3,7 @@ body{
     background-image: url(../photos/Background.png.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     animation-delay: 1s;
     opacity: 0; 
     animation: fadeIn 0.3s ease 0.1s forwards;
@@ -142,6 +143,7 @@ body.fade-out {
     height: 6vh;
     background-color: transparent;
     border-radius: 10px;
+    
 }
 
 .document-container:hover{
@@ -381,12 +383,12 @@ body.fade-out {
 .calendar-wrapper {
     position: relative;
     top: 13vh;
-    left: 2rem;
+    left: 2vw;
     background-color: #fcfaf7;
     border: 3px solid rgb(205, 205, 181);
     border-radius: 20px;
     padding: 1px;
-    width: 75vw;
+    width: 50vw;
     margin: 0 auto;
     padding: 3%;
     backdrop-filter: blur(5px);
@@ -435,14 +437,14 @@ body.fade-out {
 }
 
 .calendar-date {
-    width: 100%;
-    height: 8vh;
+    width: 80%;
+    height: 4vh;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 50%;
-    font-size: 4vh;
+    font-size: 3vh;
     transition: 0.2s;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
@@ -500,3 +502,62 @@ body.fade-out {
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
+
+
+
+.document-latest-container{
+    position: absolute;
+    top: 75vh;
+    left: 8vw;
+    width: 40vw;
+    height: 70vh;
+    background-color: #fcfaf7;
+    border-radius: 20px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.574);
+    border: 1px solid rgba(209, 170, 87, 0.419);
+
+}
+
+.blotter-latest-container{
+    position: absolute;
+    top: 75vh;
+    left: 56vw;
+    width: 40vw;
+    height: 70vh;
+    background-color: #fcfaf7;
+    border-radius: 20px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.574);
+    border: 1px solid rgba(209, 170, 87, 0.419);
+}
+
+.spacer {
+    height: 5vh;
+    clear: both;
+    position: relative;
+    top: 95vh;
+}
+
+
+.dtitle{
+    position: relative;
+    top: clamp(3%, 5%, 8%);
+    left: 26.8%;
+    font-variant: small-caps;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(16, 61, 27);
+    font-size: 4vh;
+    font-weight: 600;
+
+}
+
+.btitle{
+    display: flex;
+    position: absolute;
+    top: clamp(74vh, 79vh, 80vh);
+    left: 69.5%;
+    font-variant: small-caps;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(16, 61, 27);
+    font-size: 4vh;
+    font-weight: 600;
+}
