@@ -49,31 +49,31 @@
 
         <h2 id="lastline">BARANGAY BLOTTER</h2>
 
-        <form class="complaint-form">
+        <form id="blotterForm" class="complaint-form">
             <div class="form-group full-width">
                 <label>NAME</label>
-                <input type="text" name="name" placeholder="Full Name">
+                <input type="text" name="name" placeholder="Full Name" required>
             </div>
 
             <div class="row">
                 <div class="form-group">
                     <label>AGE</label>
-                    <input type="number" name="age">
+                    <input type="number" name="age" required>
                 </div>
                 <div class="form-group">
                     <label>STATUS</label>
-                    <input type="text" name="status" placeholder="Civil Status">
+                    <input type="text" name="status" placeholder="Civil Status" required>
                 </div>
             </div>
 
             <div class="form-group full-width">
                 <label>ADDRESS</label>
-                <input type="text" name="address">
+                <input type="text" name="address" required>
             </div>
 
             <div class="form-group full-width">
                 <label>OCCUPATION</label>
-                <input type="text" name="occupation">
+                <input type="text" name="occupation" required>
             </div>
 
             <hr class="divider">
@@ -81,20 +81,20 @@
             <div class="row">
                 <div class="form-group">
                     <label>PETSA (DATE)</label>
-                    <input type="date" name="incident_date">
+                    <input type="date" name="incident_date" required>
                 </div>
                 <div class="form-group">
                     <label>ORAS (TIME)</label>
-                    <input type="time" name="incident_time">
+                    <input type="time" name="incident_time" required>
                 </div>
             </div>
 
             <div class="form-group full-width">
                 <label>NAGSADYA DITO SI (NAME OF COMPLAINANT)</label>
-                <input type="text" name="complainant_name">
+                <input type="text" name="complainant_name" required>
                 <div class="checkbox-group">
-                    <label><input type="radio" name="age_category" value="minor"> Minor</label>
-                    <label><input type="radio" name="age_category" value="adult"> May Sapat na Gulang</label>
+                    <label><input type="radio" name="age_category" value="minor" required> Minor</label>
+                    <label><input type="radio" name="age_category" value="adult" required> May Sapat na Gulang</label>
                 </div>
             </div>
 
@@ -134,12 +134,28 @@
                 </div>
             </div>
 
+            
+
 
             <div class="form-actions">
-                <button type="button" onclick="window.location.href='blotterthankyou.html'"  class="submit-btn">Submit Blotter Report</button>
+                <button type="button" onclick="validateAndSubmit()" class="submit-btn">Submit Blotter Report</button>
             </div>
         </form>
     </div>
+
+    <script>
+    function validateAndSubmit() {
+        const form = document.getElementById('blotterForm');
+        
+        // Check if all 'required' fields are filled
+        if (form.checkValidity()) {
+            window.location.href = 'blotterthankyou.html';
+        } else {
+            // This triggers the red "Please fill out this field" bubbles
+            form.reportValidity();
+        }
+    }
+    </script>
 
 </body>
 </html>
