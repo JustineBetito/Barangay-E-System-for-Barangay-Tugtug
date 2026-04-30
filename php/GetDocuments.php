@@ -10,17 +10,18 @@ ini_set("display_errors", 0);
 ini_set("log_errors", 1);
 error_reporting(E_ALL);
 
-define("DB_HOST",    "localhost");
-define("DB_NAME",    "db_barangay_e-system");
-define("DB_USER",    "root");
-define("DB_PASS",    "");
+define("DB_HOST", "localhost");
+define("DB_NAME", "db_barangay_e-system");
+define("DB_USER", "root");
+define("DB_PASS", "");
 define("DB_CHARSET", "utf8mb4");
 
-$dsn     = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+$dsn =
+    "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => true,
+    PDO::ATTR_EMULATE_PREPARES => true,
 ];
 
 try {
@@ -28,19 +29,22 @@ try {
 } catch (PDOException $e) {
     error_log("DB Connection failed: " . $e->getMessage());
     http_response_code(500);
-    echo json_encode(["success" => false, "message" => "Database connection error."]);
-    exit;
+    echo json_encode([
+        "success" => false,
+        "message" => "Database connection error.",
+    ]);
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-
-    $search    = isset($_GET["search"])    ? trim($_GET["search"])    : "";
-    $filter    = isset($_GET["filter"])    ? trim($_GET["filter"])    : "";
+    $search = isset($_GET["search"]) ? trim($_GET["search"]) : "";
+    $filter = isset($_GET["filter"]) ? trim($_GET["filter"]) : "";
     $date_from = isset($_GET["date_from"]) ? trim($_GET["date_from"]) : "";
-    $date_to   = isset($_GET["date_to"])   ? trim($_GET["date_to"])   : "";
+    $date_to = isset($_GET["date_to"]) ? trim($_GET["date_to"]) : "";
 
-    $sql = "SELECT 
+    $sql = "SELECT
                 dr.request_ID,
+                dr.document_refnumber,
                 dr.resident_ID,
                 ri.first_name,
                 ri.last_name,
@@ -64,17 +68,19 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $params = [];
 
     if (!empty($search)) {
-        $sql .= " AND (ri.first_name LIKE :search1 
-                    OR ri.last_name  LIKE :search2 
+        $sql .= " AND (ri.first_name LIKE :search1
+                    OR ri.last_name  LIKE :search2
                     OR dr.document_purpose LIKE :search3
                     OR dr.status LIKE :search4
-                    OR d.document_type LIKE :search5)";
+                    OR d.document_type LIKE :search5
+                    OR dr.document_refnumber LIKE :search6)";
         $likeSearch = "%" . $search . "%";
         $params[":search1"] = $likeSearch;
         $params[":search2"] = $likeSearch;
         $params[":search3"] = $likeSearch;
         $params[":search4"] = $likeSearch;
         $params[":search5"] = $likeSearch;
+        $params[":search6"] = $likeSearch;
     }
 
     if (!empty($filter) && $filter !== "Total" && $filter !== "date") {
@@ -100,74 +106,102 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         // Fix zero-dates from MySQL: treat "0000-00-00" as null so JS shows dash
         foreach ($records as &$row) {
-            if (isset($row["date_released"]) &&
-                ($row["date_released"] === "0000-00-00" || $row["date_released"] === "0000-00-00 00:00:00")) {
+            if (
+                isset($row["date_released"]) &&
+                ($row["date_released"] === "0000-00-00" ||
+                    $row["date_released"] === "0000-00-00 00:00:00")
+            ) {
                 $row["date_released"] = null;
             }
         }
         unset($row);
 
-        $countStmt = $pdo->query("SELECT status, COUNT(*) as count FROM document_request GROUP BY status");
-        $counts = ["Total" => 0, "Pending" => 0, "Processing" => 0, "Ready" => 0];
+        $countStmt = $pdo->query(
+            "SELECT status, COUNT(*) as count FROM document_request GROUP BY status",
+        );
+        $counts = [
+            "Total" => 0,
+            "Pending" => 0,
+            "Processing" => 0,
+            "Ready" => 0,
+            "Released" => 0,
+        ];
         while ($row = $countStmt->fetch()) {
-            $counts[$row["status"]] = (int)$row["count"];
-            $counts["Total"] += (int)$row["count"];
+            $counts[$row["status"]] = (int) $row["count"];
+            $counts["Total"] += (int) $row["count"];
         }
 
         echo json_encode([
             "success" => true,
             "records" => $records,
-            "counts"  => $counts
+            "counts" => $counts,
         ]);
-
     } catch (PDOException $e) {
         error_log("Query error: " . $e->getMessage());
-        echo json_encode(["success" => false, "message" => "Failed to fetch records."]);
+        echo json_encode([
+            "success" => false,
+            "message" => "Failed to fetch records.",
+        ]);
     }
-    exit;
+    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $body = file_get_contents("php://input");
     $data = json_decode($body, true);
 
     if (!isset($data["request_ID"], $data["status"])) {
         http_response_code(400);
         echo json_encode(["success" => false, "message" => "Missing fields."]);
-        exit;
+        exit();
     }
 
-    $allowedStatuses = ["Pending", "Processing", "Ready"];
+    // 1. Add "Released" to your allowed statuses array
+    $allowedStatuses = ["Pending", "Processing", "Ready", "Released"];
     if (!in_array($data["status"], $allowedStatuses)) {
         echo json_encode(["success" => false, "message" => "Invalid status."]);
-        exit;
+        exit();
     }
 
     try {
-        $date_released = ($data["status"] === "Ready") ? date("Y-m-d") : null;
+
+        // If JS sent clear_date_released = true (user clicked Unlock),
+        // force date_released to NULL right away regardless of status.
+        // Otherwise use normal logic: today if Released, null if anything else.
+        if (!empty($data["clear_date_released"])) {
+            $date_released = null;
+        } else {
+            $date_released = ($data["status"] === "Released") ? date("Y-m-d") : null;
+        }
 
         $stmt = $pdo->prepare(
-            "UPDATE document_request 
-             SET status = :status, date_released = :date_released 
-             WHERE request_ID = :id"
+            "UPDATE document_request
+             SET status = :status, date_released = :date_released
+             WHERE request_ID = :id",
         );
+
         $stmt->execute([
-            ":status"        => $data["status"],
+            ":status" => $data["status"],
             ":date_released" => $date_released,
-            ":id"            => $data["request_ID"]
+            ":id" => $data["request_ID"],
         ]);
 
-        echo json_encode(["success" => true, "message" => "Status updated successfully."]);
-
+        echo json_encode([
+            "success" => true,
+            "message" => "Status updated successfully.",
+            "date_released" => $date_released // Optional: return to JS for UI update
+        ]);
     } catch (PDOException $e) {
         error_log("Update error: " . $e->getMessage());
-        echo json_encode(["success" => false, "message" => "Failed to update status."]);
+        echo json_encode([
+            "success" => false,
+            "message" => "Failed to update status.",
+        ]);
     }
-    exit;
+    exit();
 }
 
 http_response_code(405);
 echo json_encode(["success" => false, "message" => "Method not allowed."]);
-exit;
+exit();
 ?>
