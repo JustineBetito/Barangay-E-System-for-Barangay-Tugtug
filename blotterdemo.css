@@ -1,75 +1,95 @@
-/* --- GLOBAL STYLES & ANIMATION --- */
-body {
+body{
     margin: 0;
     background-image: url(photos/Background.png.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
     animation-delay: 1s;
-    opacity: 0; 
+    opacity: 0;
     animation: fadeIn 0.3s ease 0.1s forwards;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
 }
 
 @keyframes fadeIn {
     to { opacity: 1; }
 }
 
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
 
-.navigation_container {
+.navigation_container{
     padding: 2vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
+    text-wrap: wrap;
+
 }
 
-.Logo-container {
+.Logo-container{
     display: flex;
     margin-left: 3%;
-    gap: 15px;
-    align-items: center;
+    gap: 18%;
+
 }
 
-.Logo-Nav {
+.Logo{
     width: 80px;
     height: auto;
+    
 }
 
-.Logo-name {
+.Logo-name{
+    margin-top: 2%;
+    width: 20%;
     text-decoration: none;
+    font-size: 90%;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    font-size: 100%;
     color: rgb(3, 47, 21);
+
 }
 
-.Logo-name h2 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.Button-container {
+.Button-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content:flex-end;
     align-items: center;
     gap: 25px;
+    margin-left: clamp(20%, 20%, 20%);
     margin-right: 5%;
-}
+    text-wrap: wrap;
 
-.Button-container button {
+}    
+
+button{
     border: transparent;
     background-color: transparent;
     color: black;
     font-family: Verdana;
     height: 30px;
-    width: 100px;
+    width:100px;
     border-radius: 5px;
     transition: width 0.5s, border-color 0.2s;
     font-size: 13px;
-    cursor: pointer;
+    letter-spacing: 10%;
+    text-wrap: wrap;
+    font-size: 90%;
+
 }
 
-.Button-container button:hover {
+button:hover{
+    cursor: pointer;
     border: 2px solid rgb(3, 47, 21);
-    width: 110px;
+    width:110px;
+}
+
+.body-container{
+    display: flex;
+    flex-direction: row;
+    
 }
 
 /* --- FORM CONTAINER (PAPER LOOK) --- */
