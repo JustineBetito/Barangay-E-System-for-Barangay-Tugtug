@@ -91,8 +91,10 @@ function renderResult(data) {
     const statusColors = {
         "Pending":    { bg: "#fff7ed", border: "#fb923c", color: "#9a3412" },
         "Processing": { bg: "#eff6ff", border: "#60a5fa", color: "#1e40af" },
+        "Scheduled":  { bg: "#eff6ff", border: "#60a5fa", color: "#1e40af" },
         "Ready":      { bg: "#f0fdf4", border: "#4ade80", color: "#166534" },
         "Resolved":   { bg: "#f0fdf4", border: "#4ade80", color: "#166534" },
+        "Escalated":  { bg: "#f5f3ff", border: "#8b5cf6", color: "#4a235a" },
     };
     const sc = statusColors[d.status] || { bg: "#f9fafb", border: "#d1d5db", color: "#374151" };
     statusBanner.style.cssText = `display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-radius:10px;margin-bottom:12px;background:${sc.bg};border:2px solid ${sc.border};`;
@@ -101,7 +103,7 @@ function renderResult(data) {
     statusValue.style.color   = sc.color;
 
     // Status emoji
-    const statusEmoji = { "Pending":"⏳", "Processing":"🔄", "Ready":"✅", "Resolved":"✅" };
+    const statusEmoji = { "Pending":"⏳", "Processing":"🔄", "Scheduled":"📅", "Ready":"✅", "Resolved":"✅", "Escalated":"🔺" };
     statusValue.textContent = (statusEmoji[d.status] || "") + " " + d.status;
 
     // ── Price ─────────────────────────────────────────────────
@@ -115,11 +117,20 @@ function renderResult(data) {
 
     if (type === "blotter") {
         details = [
-            { key: "Name",           val: d.name,          full: false },
-            { key: "Complainant",    val: d.complainant,   full: false },
-            { key: "Incident Date",  val: fmtDate(d.incident_date), full: false },
-            { key: "Complaint",      val: d.complaint,     full: true  },
+            { key: "Name",          val: d.name,                   full: false },
+            { key: "Complainant",   val: d.complainant,            full: false },
+            { key: "Incident Date", val: fmtDate(d.incident_date), full: false },
         ];
+        // Add schedule rows for whichever slots have data
+        for (let i = 1; i <= 3; i++) {
+            const sd = d["schedule_date_" + i];
+            const st = d["schedule_time_" + i];
+            if (sd) {
+                details.push({ key: "Schedule " + i, val: fmtDate(sd) + (st ? " @ " + fmtTime(st) : ""), full: false });
+            }
+        }
+        details.push({ key: "Complaint", val: d.complaint, full: true });
+        details = details;
     } else {
         details = [
             { key: "Resident Name",    val: d.name,           full: false },
@@ -144,9 +155,9 @@ function renderResult(data) {
 
     const steps = type === "blotter"
         ? [
-            { label: "Submitted", icon: "📝", statuses: ["Pending","Processing","Ready","Resolved"] },
-            { label: "Processing", icon: "🔄", statuses: ["Processing","Ready","Resolved"] },
-            { label: "Resolved",   icon: "✅", statuses: ["Ready","Resolved"] },
+            { label: "Submitted",  icon: "📝", statuses: ["Pending","Scheduled","Resolved","Escalated"] },
+            { label: "Scheduled",  icon: "📅", statuses: ["Scheduled","Resolved","Escalated"] },
+            { label: "Resolved",   icon: "✅", statuses: ["Resolved","Escalated"] },
           ]
         : [
             { label: "Submitted",   icon: "📝", statuses: ["Pending","Processing","Ready"] },
@@ -164,7 +175,7 @@ function renderResult(data) {
 
         // Simpler: mark done if current status is at or past this step
         const statusOrder = type === "blotter"
-            ? ["Pending", "Processing", "Resolved"]
+            ? ["Pending", "Scheduled", "Resolved"]
             : ["Pending", "Processing", "Ready"];
         const currentIdx = statusOrder.indexOf(d.status);
         const stepIdx    = i;
@@ -183,4 +194,13 @@ function fmtDate(dateStr) {
     if (!dateStr) return "—";
     const d = new Date(dateStr);
     return d.toLocaleDateString("en-PH", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function fmtTime(timeStr) {
+    if (!timeStr) return "";
+    const [h, m] = timeStr.split(":");
+    const hour = parseInt(h);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const h12  = hour % 12 || 12;
+    return h12 + ":" + m + " " + ampm;
 }

@@ -220,7 +220,7 @@ body.fade-out {
     left: 1vw;
     width: 3.4vw;
     height: 6vh;
-    background-color: rgb(145, 124, 5);
+    background-color: transparent;
     border-radius: 10px;
 }
 
@@ -266,7 +266,7 @@ body.fade-out {
     position: relative;
     right: -100vw;
     font-size: 0;
-    color: black;  
+    color: rgb(205, 205, 181);
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: 0.1s ease-in-out 0.003s;
     
@@ -313,7 +313,7 @@ body.fade-out {
     left: 1vw;
     width: 3.4vw;
     height: 6vh;
-    background-color: transparent;
+    background-color: rgb(145, 124, 5);
     border-radius: 10px;
     
 }
@@ -358,7 +358,7 @@ body.fade-out {
     position: relative;
     right: -100vw;
     font-size: 0;
-    color: rgb(205, 205, 181);    
+    color: black;  
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: 0.1s ease-in-out 0.003s;
 }
@@ -450,7 +450,6 @@ body.fade-out {
 
 
 
-
 /* navbar */
 .upbar-container{
     display: flex;
@@ -472,79 +471,17 @@ body.fade-out {
 }
 
 
-
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------ */
-
-
-.total{
-    position: relative;
-    top: 13vh;
-    left: 10vw;
-    width: 20vw;
-    height: 13vh;
-    max-height: 20vh;
-    background-color: #f3efe8;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.459);
-    border-radius: 15px;   
-}
-
-
-.processing{
-    position: relative;
-    top: 0vh;
-    left: 31.8vw;
-    width: 20vw;
-    height: 13vh;
-    max-height: 20vh;
-    background-color: #f3efe8;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.459);
-    border-radius: 15px;   
-}
-
-.pending{
-    position: relative;
-    top: -13vh;
-    left: 53.5vw;
-    width: 20vw;
-    height: 13vh;
-    max-height: 20vh;
-    background-color: #f3efe8;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.459);
-    border-radius: 15px;
-}
-
-.ready{
-    position: relative;
-    top: -26vh;
-    left: 75vw;
-    width: 20vw;
-    height: 13vh;
-    max-height: 20vh;
-    background-color: #f3efe8;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.459);
-    border-radius: 15px;
-}
-
-
-.total-word, .processing-word, .pending-word, .ready-word {
-    position: absolute;
-    left: 1vw;
-    top: 1vh;
-    font-size: 3vh;
-    font-variant: small-caps;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    color: rgb(16, 61, 27);
-}
 
 
 .database{
     position: relative;
-    top: -23vh;
+    top: 17vh;
     left: 15.5vh;
     width: 90%;
     height: 90vh;
@@ -562,8 +499,6 @@ body.fade-out {
     border-top-right-radius: 15px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.459);
 }
-
-
 
 /* Container Bar setup */
 
@@ -662,43 +597,3 @@ body.fade-out {
     background: #a4c45a;
     transform: translateY(-1px);
 }
-
-.btn-new {
-    position: relative;
-    left: 68vh;
-    background: #7d9e3b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-}
-
-.btn-new:hover {
-    background: #a4c45a;
-    transform: translateY(-1px);
-}
-
-.btn-print {
-    position: relative;
-    left: 69vh;
-    width: 6vw;
-    background: #7d9e3b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-}
-
-.btn-print:hover {
-    background: #a4c45a;
-    transform: translateY(-1px);
-}
-

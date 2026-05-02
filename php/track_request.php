@@ -42,11 +42,15 @@ if (str_starts_with($ref, "BRGY-")) {
     // ── Blotter lookup ────────────────────────────────────────
     try {
         $stmt = $pdo->prepare(
-            "SELECT b.blotter_ID, b.name, b.complainant_name,
-                    b.incident_date, b.status, b.complaint_details,
-                    br.blotter_refnumber
+            "SELECT b.blotter_id, b.full_name, b.complaint_against,
+                    b.petsa, b.status, b.complaint_details,
+                    b.reference_number,
+                    bd.schedule_date_1, bd.schedule_time_1,
+                    bd.schedule_date_2, bd.schedule_time_2,
+                    bd.schedule_date_3, bd.schedule_time_3
              FROM blotter_reference_number br
-             JOIN blotter b ON br.blotter_ID = b.blotter_ID
+             JOIN blotter_details bd ON br.detail_id  = bd.detail_id
+             JOIN blotter b          ON bd.blotter_id = b.blotter_id
              WHERE br.blotter_refnumber = :ref
              LIMIT 1"
         );
@@ -62,13 +66,19 @@ if (str_starts_with($ref, "BRGY-")) {
             "success" => true,
             "type"    => "blotter",
             "data"    => [
-                "reference_number" => $row["blotter_refnumber"],
-                "name"             => $row["name"],
-                "complainant"      => $row["complainant_name"],
-                "incident_date"    => $row["incident_date"],
+                "reference_number" => $row["reference_number"],
+                "name"             => $row["full_name"],
+                "complainant"      => $row["complaint_against"],
+                "incident_date"    => $row["petsa"],
                 "complaint"        => $row["complaint_details"],
                 "status"           => $row["status"],
-                "price"            => "Free", // Blotter is always free
+                "price"            => "Free",
+                "schedule_date_1"  => $row["schedule_date_1"],
+                "schedule_time_1"  => $row["schedule_time_1"],
+                "schedule_date_2"  => $row["schedule_date_2"],
+                "schedule_time_2"  => $row["schedule_time_2"],
+                "schedule_date_3"  => $row["schedule_date_3"],
+                "schedule_time_3"  => $row["schedule_time_3"],
             ]
         ]);
     } catch (PDOException $e) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cssfile/blotterdemo.css">
     <title>Barangay Blotter Form - Barangay Tugtug</title>
+    <link rel="icon" href="photos/logo.png.png"/>
 </head>
 <body>
 
@@ -74,14 +75,29 @@
                 <label>NAGSADYA DITO SI (NAME OF COMPLAINANT)</label>
                 <input type="text" name="complainant_name" required>
                 <div class="checkbox-group">
-                    <label><input type="radio" name="age_category" value="minor" required> Minor</label>
-                    <label><input type="radio" name="age_category" value="adult" required> May Sapat na Gulang</label>
+                    <label><input type="radio" name="age_category" value="minor"> Minor</label>
+                    <label><input type="radio" name="age_category" value="adult"> May Sapat na Gulang</label>
                 </div>
             </div>
 
             <div class="form-group full-width">
+                <label>COMPLAINT TYPE</label>
+                <select name="complaint_type" required>
+                    <option value="">— Select Type —</option>
+                    <option value="Physical Assault">Physical Assault</option>
+                    <option value="Verbal Abuse">Verbal Abuse</option>
+                    <option value="Property Dispute">Property Dispute</option>
+                    <option value="Noise Complaint">Noise Complaint</option>
+                    <option value="Theft">Theft</option>
+                    <option value="Trespassing">Trespassing</option>
+                    <option value="Family Dispute">Family Dispute</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
                 <label>REKLAMO / TULONG (FOR/PARA KAY/SA)</label>
-                <textarea name="complaint_details" rows="4" placeholder="Nature of complaint..."></textarea>
+                <textarea name="complaint_details" rows="4" placeholder="Nature of complaint..." required></textarea>
             </div>
 
             <div class="location-footer">
@@ -124,18 +140,7 @@
         </form>
     </div>
 
-    <script>
-    function validateAndSubmit() {
-        const form = document.getElementById('blotterForm');
-        
-        if (form.checkValidity()) {
-            window.location.href = 'blotterthankyou.html';
-        } else {
-
-            form.reportValidity();
-        }
-    }
-    </script>
+    <script src="Javascript/blotterform.js"></script>
 
 </body>
 </html>

@@ -278,6 +278,101 @@ body.fade-out {
 }
 
 
+/* sidebar divider */
+
+.sidebar-divider2{
+    visibility: hidden;
+    position: relative;
+    bottom: -200%;
+    color: transparent;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    
+}
+
+.sidebar-container:hover .sidebar-divider2{
+    visibility: visible;
+    position: relative;
+    width: 18vw;
+    top: 20vh;
+    right: 1%;
+    color: rgb(205, 205, 181);  
+}
+
+
+/* Analytics */
+
+.analytics-container{
+    position: relative;
+    top: 23vh;
+    left: 1vw;
+    width: 3.4vw;
+    height: 6vh;
+    background-color: transparent;
+    border-radius: 10px;
+    
+}
+
+.analytics-container:hover{
+    background-color: rgb(145, 124, 5);
+}
+
+.sidebar-container:hover .analytics-container{
+    position: relative;
+    bottom: 4vh;
+    left: 1vw;
+    width: 200vw;
+    height: 6vh;
+    cursor: pointer;
+}
+.Analytics{
+    background-color: transparent;
+    border-color: transparent;
+    position: relative;
+    top: 1vh;
+    left: 8%;
+}
+
+.picture-analytics{
+    width: 2vw;
+}
+
+.picture-analytics:hover{
+    cursor: pointer;
+}
+
+.sidebar-container:hover .picture-analytics{
+    position: relative;
+    top: 20%;
+    right: 15vw;
+}
+
+.Analytics-word{
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: -100vw;
+    font-size: 0;
+    color: rgb(205, 205, 181);    
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: 0.1s ease-in-out 0.003s;
+}
+
+.analytics-container:hover .Analytics-word{
+    color: black;
+}
+
+
+.sidebar-container:hover .Analytics-word{
+    position: relative;
+    bottom: 55%;
+    left: 5vw;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+/* profile */
+
+
 .Profile{
     background-color: transparent;
     border: transparent;
@@ -285,7 +380,7 @@ body.fade-out {
 
 .picture-profile{
     position: relative;
-    top: 65vh;
+    top: 57vh;
     width: 4.6vw;
     right: 0.2vw;
     transition:0.3s ease 0.2s;
@@ -293,7 +388,7 @@ body.fade-out {
 
 .sidebar-container:hover .picture-profile{
     position: relative;
-    top: 56vh;
+    top: 48vh;
 }
 
 .sidebar-divider{
@@ -309,7 +404,7 @@ body.fade-out {
     visibility: visible;
     position: relative;
     width: 18vw;
-    top: 44vh;
+    top: 36vh;
     right: 1%;
     color: rgb(205, 205, 181);  
 }
@@ -336,7 +431,7 @@ body.fade-out {
     visibility: visible;
     width: 1.5vw;
     position: relative;
-    top: clamp(46vh, 48.5vh, 50vh);
+    top: clamp(40vh, 40.5vh, 50vh);
     left: 17vw;
 }
 
@@ -507,7 +602,7 @@ body.fade-out {
 
 .document-latest-container{
     position: absolute;
-    top: 75vh;
+    top: 80vh;
     left: 8vw;
     width: 40vw;
     height: 70vh;
@@ -520,7 +615,7 @@ body.fade-out {
 
 .blotter-latest-container{
     position: absolute;
-    top: 75vh;
+    top: 80vh;
     left: 56vw;
     width: 40vw;
     height: 70vh;
@@ -551,10 +646,9 @@ body.fade-out {
 }
 
 .btitle{
-    display: flex;
-    position: absolute;
-    top: clamp(74vh, 79vh, 80vh);
-    left: 69.5%;
+    position: relative;
+    top: clamp(3%, 5%, 8%);
+    left: 31.5%;
     font-variant: small-caps;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(16, 61, 27);
