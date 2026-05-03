@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>Home | Barangay Tugtug E-System</title>
-        <script src='Javascript/Dashboard.js'></script>
+        <title>Analytics | Barangay Tugtug E-System</title>
+        <link rel="stylesheet" href="cssfile/Dashboard.css"/>
         <link rel="stylesheet" href="cssfile/Analytics.css"/>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,100 +10,442 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            /* ── Page wrapper: clears fixed sidebar (5vw) + fixed topbar (~9vh) ── */
+            .analytics-page-wrapper {
+                margin-left: 6vw;
+                margin-top: 10vh;
+                padding: 2.5vh 2.5vw 8vh 2.5vw;
+                box-sizing: border-box;
+                min-height: 90vh;
+                display: flex;
+                flex-direction: column;
+                gap: 3vh;
+            }
+
+            /* ── Card ── */
+            .analytics-card {
+                background-color: #fcfaf7 !important;
+                border-radius: 18px !important;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
+                border: 1px solid rgba(209,170,87,0.35) !important;
+                padding: 2.5vh 2.5vw !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+            }
+
+            /* ── Card header ── */
+            .card-header {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                flex-wrap: wrap !important;
+                gap: 1.5vh !important;
+                margin-bottom: 2.5vh !important;
+                padding-bottom: 1.5vh !important;
+                border-bottom: 2px solid rgba(55,83,9,0.15) !important;
+            }
+            .card-title-group {
+                display: flex !important;
+                align-items: center !important;
+                gap: 1vw !important;
+            }
+            .card-icon {
+                font-size: 3vh !important;
+                color: #375309 !important;
+            }
+            .card-title {
+                font-family: 'Crimson Text', serif !important;
+                font-size: 3.2vh !important;
+                color: #375309 !important;
+                margin: 0 !important;
+                font-weight: 700 !important;
+            }
+
+            /* ── Controls ── */
+            .card-controls {
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.8vw !important;
+                flex-wrap: wrap !important;
+            }
+            .ctrl-label {
+                font-family: 'Segoe UI', sans-serif !important;
+                font-size: 1.5vh !important;
+                font-weight: 600 !important;
+                color: #375309 !important;
+            }
+            .ctrl-select {
+                background: #f3efe8 !important;
+                border: 1.5px solid #7d9e3b !important;
+                border-radius: 8px !important;
+                padding: 5px 10px !important;
+                color: #273b07 !important;
+                font-size: 1.5vh !important;
+                font-weight: 600 !important;
+                cursor: pointer !important;
+                outline: none !important;
+                font-family: 'Segoe UI', sans-serif !important;
+            }
+            .ctrl-btn {
+                background: #375309 !important;
+                color: #f3efe8 !important;
+                border: none !important;
+                border-radius: 8px !important;
+                padding: 6px 18px !important;
+                font-size: 1.5vh !important;
+                font-weight: 700 !important;
+                cursor: pointer !important;
+                font-family: 'Segoe UI', sans-serif !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+                transition: background 0.2s !important;
+            }
+            .ctrl-btn:hover { background: #7d9e3b !important; }
+
+            /* ── Chart area ── */
+            .chart-area {
+                position: relative !important;
+                width: 100% !important;
+                min-height: 38vh !important;
+                display: block !important;
+            }
+            .chart-placeholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1.5vh;
+                text-align: center;
+                padding: 6vh 2vw;
+                min-height: 32vh;
+                box-sizing: border-box;
+            }
+            .placeholder-icon {
+                font-size: 8vh !important;
+                opacity: 0.2 !important;
+                color: #375309 !important;
+            }
+            .chart-placeholder p {
+                font-family: 'Segoe UI', sans-serif !important;
+                font-size: 1.8vh !important;
+                color: #5a6b4a !important;
+                max-width: 50vw !important;
+            }
+            .chart-canvas-wrapper {
+                position: relative !important;
+                width: 100% !important;
+                height: 38vh !important;
+            }
+            #docChart, #blotterChart {
+                width: 100% !important;
+                height: 100% !important;
+                display: block !important;
+            }
+
+            /* ── Loading spinner ── */
+            .chart-loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1.2vw;
+                color: #375309;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 2vh;
+                padding: 6vh 0;
+            }
+            .spinner {
+                width: 3.5vh; height: 3.5vh;
+                border: 3px solid rgba(55,83,9,0.2);
+                border-top-color: #375309;
+                border-radius: 50%;
+                animation: spin 0.75s linear infinite;
+            }
+            @keyframes spin { to { transform: rotate(360deg); } }
+
+            /* ── Empty state ── */
+            .chart-empty {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2vh;
+                color: #7a8c6a;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 1.8vh;
+                padding: 5vh 0;
+            }
+            .chart-empty i { font-size: 6vh; opacity: 0.3; }
+
+            /* ── Summary chips ── */
+            .summary-row {
+                display: flex !important;
+                gap: 1.5vw !important;
+                flex-wrap: wrap !important;
+                margin-top: 2vh !important;
+                padding-top: 1.5vh !important;
+                border-top: 1px solid rgba(55,83,9,0.12) !important;
+            }
+            .summary-chip {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                background: #f3efe8 !important;
+                border-radius: 12px !important;
+                padding: 1.2vh 2vw !important;
+                min-width: 9vw !important;
+                border: 1.5px solid transparent !important;
+                transition: transform 0.2s !important;
+            }
+            .summary-chip:hover { transform: translateY(-2px); }
+            .chip-label {
+                font-family: 'Segoe UI', sans-serif !important;
+                font-size: 1.2vh !important;
+                font-weight: 600 !important;
+                color: #6b7c5a !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.05em !important;
+            }
+            .chip-value {
+                font-family: 'Crimson Text', serif !important;
+                font-size: 3.5vh !important;
+                font-weight: 700 !important;
+                margin-top: 0.3vh !important;
+                color: #273b07 !important;
+            }
+            .total-chip     { border-color: #375309 !important; }
+            .total-chip .chip-value { color: #375309 !important; }
+            .top-chip       { border-color: #7d9e3b !important; }
+            .top-chip .chip-value { color: #5a7a20 !important; font-size: 2vh !important; }
+            .resolved-chip  { border-color: #198754 !important; }
+            .resolved-chip .chip-value { color: #0a5c38 !important; }
+            .escalated-chip { border-color: #dc3545 !important; }
+            .escalated-chip .chip-value { color: #9b1c2a !important; }
+            .dismissed-chip { border-color: #6c757d !important; }
+            .dismissed-chip .chip-value { color: #3d4449 !important; }
+            .pending-chip   { border-color: #ffc107 !important; }
+            .pending-chip .chip-value { color: #8a6a00 !important; }
+
+            /* ── Analytics sidebar item ── */
+            .analytics-container {
+                position: relative;
+                top: 21vh;
+                left: 1vw;
+                width: 3.4vw;
+                height: 6vh;
+                background-color: transparent;
+                border-radius: 10px;
+            }
+            .analytics-container:hover,
+            .analytics-active { background-color: rgb(145,124,5); }
+            .sidebar-container:hover .analytics-container {
+                position: relative;
+                bottom: 4vh;
+                left: 1vw;
+                width: 200vw;
+                height: 6vh;
+                cursor: pointer;
+            }
+            .Analytics-btn {
+                background-color: transparent;
+                border-color: transparent;
+                position: relative;
+                top: 10%; left: 8%;
+                cursor: pointer;
+            }
+            .analytics-icon { color: antiquewhite; font-size: 2vw; }
+            .Analytics-word {
+                display: flex;
+                align-items: center;
+                position: relative;
+                right: -100vw;
+                font-size: 0;
+                color: rgb(205,205,181);
+                font-family: system-ui, sans-serif;
+                transition: 0.1s ease-in-out 0.003s;
+            }
+            .sidebar-container:hover .Analytics-word {
+                position: relative;
+                bottom: 80%;
+                left: 5vw;
+                font-size: 2vh;
+                cursor: pointer;
+            }
+        </style>
+        <!-- Chart.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     </head>
 
     <body>
 
+        <!-- ── Sidebar (same as other pages) ── -->
         <nav class="sidebar-container">
-
-            <div class="Logo-container" >
-
-                <image class="Logo" src="photos/logo.png.png" alt="Error to Load Image"></image>
+            <div class="Logo-container">
+                <image class="Logo" src="photos/logo.png.png" alt="Logo"></image>
                 <h2 class="E-System">Barangay E-System</h2>
 
-            <div class="home-container">
-                
-                <button class="Home" type="submit"><image class="picture-home" src="photos/home.png"></image></button>
-                <h3 class="Home-word">Home</h3>
+                <div class="home-container" onclick="window.location.href='Dashboard.html'">
+                    <button class="Home" type="button"><image class="picture-home" src="photos/Home.png"></image></button>
+                    <h3 class="Home-word">Home</h3>
+                </div>
 
-            </div>
-            
-                
-            <div class="document-container" onclick="window.location.href='Documentrequest.html'">
+                <div class="document-container" onclick="window.location.href='Documentrequest.html'">
+                    <button class="Document" type="button"><image class="picture-document" src="photos/Document.png"></image></button>
+                    <h3 class="Document-word">Document Requests</h3>
+                </div>
 
-                <button class="Document" type="submit" onclick="window.location.href='Documentrequest.html'"><image class="picture-document" src="photos/Document.png"></image></button>
-                <h3 class="Document-word">Document Requests</h3>
+                <div class="blotter-container" onclick="window.location.href='Blotter.html'">
+                    <button class="Blotter" type="button"><image class="picture-blotter" src="photos/Blotter.png"></image></button>
+                    <h3 class="Blotter-word">Blotter Dashboard</h3>
+                </div>
 
-            </div>
+                <!-- Analytics nav item -->
+                <div class="analytics-container analytics-active">
+                    <button class="Analytics-btn" type="button">
+                        <i class="fa fa-bar-chart analytics-icon"></i>
+                    </button>
+                    <h3 class="Analytics-word">Analytics</h3>
+                </div>
 
-
-            <div class="blotter-container" onclick="window.location.href='Blotter.html'">
-
-                <button class="Blotter" type="submit" onclick="window.location.href='Blotter.html'"><image class="picture-blotter" src="photos/Blotter.png"></image></button>
-                <h3 class="Blotter-word">Blotter Dashboard</h3>
-            </div>
-
-            <hr class="sidebar-divider2">
-
-            <div class="analytics-container" onclick="window.location.href='Analytics.html'">
-
-                <button class="Analytics" type="submit" onclick="window.location.href='Analytics.html'"><image class="picture-analytics" src="photos/analytics.png"></image></button>
-                <h3 class="Analytics-word">Analytics</h3>
-            </div>
-
-
-            <div>
-
-                <button class="Profile" type="submit"><image class="picture-profile" src="photos/ProfilePicture.png"></image></button>
-                <hr class="sidebar-divider">
-                <button class="Logout" type="submit" onclick="window.location.href='Login.html'"><image class="picture-logout" src="photos/Logout.png"></image></button>
-
-            </div>
-
-            </div>
-
-        </nav>
-
-
-        <nav class="upbar-container">
-
-            <h1 class="home-title">Analytics</h1>
-            
-            
-
-        </nav>
-
-        <section class="database">
-            <div class="container-bar">
-                <div class="search-wrapper">
-
-                    <div class="search-group">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" placeholder="Search records" class="search-input">
-                    </div>
-
-                    <div class="filter-group">
-                        <select class="filter-select">
-                            <option value="">Filter By</option>
-                            <option value="date">Date</option>
-                            <optgroup label="Status">
-                                <option value="Pending">Pending</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Resolved">Resolved</option>
-                                <option value="Escalated">Escalated</option>
-                            </optgroup>
-                        </select>
-
-                        <button class="btn-display">Display All</button>
-                        <button class="btn-hearings">Hearings</button>
-                    </div>
-
+                <div>
+                    <button class="Profile" type="button"><image class="picture-profile" src="photos/ProfilePicture.png"></image></button>
+                    <hr class="sidebar-divider">
+                    <button class="Logout" type="button" onclick="window.location.href='Login.html'"><image class="picture-logout" src="photos/Logout.png"></image></button>
                 </div>
             </div>
+        </nav>
 
-        </section>
+        <!-- ── Top Bar ── -->
+        <nav class="upbar-container">
+            <h1 class="home-title">Analytics</h1>
+        </nav>
 
+        <!-- ── Main Content ── -->
+        <div class="analytics-page-wrapper">
+
+            <!-- ════════════════════════════════════════════
+                 SECTION 1 — Document Requests Bar Chart
+            ═════════════════════════════════════════════ -->
+            <section class="analytics-card" id="doc-analytics-card">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <i class="fa fa-file-text card-icon"></i>
+                        <h2 class="card-title">Document Requests by Type</h2>
+                    </div>
+                    <div class="card-controls">
+                        <label class="ctrl-label">Month</label>
+                        <select id="doc-month-select" class="ctrl-select">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <label class="ctrl-label">Year</label>
+                        <select id="doc-year-select" class="ctrl-select">
+                            <!-- filled by JS -->
+                        </select>
+                        <button id="doc-load-btn" class="ctrl-btn">
+                            <i class="fa fa-refresh"></i> Load
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-area" id="doc-chart-area">
+                    <div class="chart-placeholder" id="doc-placeholder">
+                        <i class="fa fa-bar-chart placeholder-icon"></i>
+                        <p>Select a month and year, then click <strong>Load</strong> to view document request data.</p>
+                    </div>
+                    <div class="chart-canvas-wrapper" id="doc-canvas-wrapper" style="display:none;"><canvas id="docChart"></canvas></div>
+                </div>
+
+                <div class="summary-row" id="doc-summary" style="display:none;">
+                    <div class="summary-chip total-chip">
+                        <span class="chip-label">Total Requests</span>
+                        <span class="chip-value" id="doc-total-val">0</span>
+                    </div>
+                    <div class="summary-chip top-chip">
+                        <span class="chip-label">Most Requested</span>
+                        <span class="chip-value" id="doc-top-val">—</span>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ════════════════════════════════════════════
+                 SECTION 2 — Blotter Cases Monthly Chart
+            ═════════════════════════════════════════════ -->
+            <section class="analytics-card" id="blotter-analytics-card">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <i class="fa fa-shield card-icon"></i>
+                        <h2 class="card-title">Blotter Cases per Month</h2>
+                    </div>
+                    <div class="card-controls">
+                        <label class="ctrl-label">Year</label>
+                        <select id="blotter-year-select" class="ctrl-select">
+                            <!-- filled by JS -->
+                        </select>
+                        <button id="blotter-load-btn" class="ctrl-btn">
+                            <i class="fa fa-refresh"></i> Load
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-area" id="blotter-chart-area">
+                    <div class="chart-placeholder" id="blotter-placeholder">
+                        <i class="fa fa-shield placeholder-icon"></i>
+                        <p>Select a year, then click <strong>Load</strong> to view blotter case data.</p>
+                    </div>
+                    <div class="chart-canvas-wrapper" id="blotter-canvas-wrapper" style="display:none;"><canvas id="blotterChart"></canvas></div>
+                </div>
+
+                <div class="summary-row" id="blotter-summary" style="display:none;">
+                    <div class="summary-chip total-chip">
+                        <span class="chip-label">Total Filed</span>
+                        <span class="chip-value" id="blotter-total-val">0</span>
+                    </div>
+                    <div class="summary-chip resolved-chip">
+                        <span class="chip-label">Resolved</span>
+                        <span class="chip-value" id="blotter-resolved-val">0</span>
+                    </div>
+                    <div class="summary-chip escalated-chip">
+                        <span class="chip-label">Escalated</span>
+                        <span class="chip-value" id="blotter-escalated-val">0</span>
+                    </div>
+                    <div class="summary-chip dismissed-chip">
+                        <span class="chip-label">Dismissed</span>
+                        <span class="chip-value" id="blotter-dismissed-val">0</span>
+                    </div>
+                    <div class="summary-chip pending-chip">
+                        <span class="chip-label">Pending</span>
+                        <span class="chip-value" id="blotter-pending-val">0</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="spacer"></div>
+
+        <script src="Javascript/Analytics.js"></script>
     </body>
-
 </html>

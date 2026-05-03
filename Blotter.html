@@ -11,7 +11,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="cssfile/Analytics.css"/>
     </head>
+
 
     <body>
 
@@ -23,7 +26,6 @@
                 <h2 class="E-System">Barangay E-System</h2>
 
             <div class="home-container" onclick="window.location.href='Dashboard.html'">
-
                 <button class="Home" type="submit" onclick="window.location.href='Dashboard.html'"><image class="picture-home" src="photos/home.png"></image></button>
                 <h3 class="Home-word">Home</h3>
 
@@ -44,14 +46,12 @@
                 <h3 class="Blotter-word">Blotter Dashboard</h3>
             </div>
 
-            <hr class="sidebar-divider2">
+
 
             <div class="analytics-container" onclick="window.location.href='Analytics.html'">
-
-                <button class="Analytics" type="submit" onclick="window.location.href='Analytics.html'"><image class="picture-analytics" src="photos/analytics.png"></image></button>
+                <button class="Analytics-btn" type="submit"><i class="fa fa-bar-chart analytics-icon"></i></button>
                 <h3 class="Analytics-word">Analytics</h3>
             </div>
-
 
             <div>
 
@@ -66,65 +66,111 @@
         </nav>
 
         <nav class="upbar-container">
+
             <h1 class="home-title">Blotter Requests</h1>
+            
+            
+
         </nav>
+
 
         <section class="progress-container">
 
             <div class="total">
+
                 <label class="total-word">Total</label>
+
+
             </div>
 
+
+            
             <div class="processing">
-                <label class="processing-word">Scheduled</label>
+
+                <label class="processing-word">Processing</label>
+
             </div>
+
+
 
             <div class="pending">
+
                 <label class="pending-word">Pending</label>
+
             </div>
 
+
+
             <div class="ready">
-                <label class="ready-word">Resolved</label>
+
+                <label class="ready-word">Ready</label>
+
             </div>
+
 
         </section>
 
         <section class="database">
 
             <div class="container-bar">
+
                 <div class="search-wrapper">
 
                     <div class="search-group">
+
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" placeholder="Search records" class="search-input">
+                    
                     </div>
+                    
+
 
                     <div class="filter-group">
+
                         <select class="filter-select">
+
                             <option value="">Filter By</option>
                             <option value="date">Date</option>
+
                             <optgroup label="Status">
+                                <option value="Total">Total</option>
+                                <option value="Processing">Processing</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Resolved">Resolved</option>
-                                <option value="Escalated">Escalated</option>
+                                <option value="Ready">Ready</option>
+
                             </optgroup>
                         </select>
 
+
                         <button class="btn-display">Display All</button>
-                        <button class="btn-hearings">Hearings</button>
-                        <button class="btn-new" onclick="window.location.href='blotterdemo.html'">+ New Request</button>
+                        <button class="btn-new" onclick="window.location.href='residentform.html'">+ New Request</button>
                         <button class="btn-print">Print</button>
+
+
                     </div>
 
+
                 </div>
+
+
             </div>
 
-            <div class="document-records"></div>
+
 
         </section>
 
-        <script src="Javascript/Blotter.js"></script>
+
+        
+
+
+
+
+
+        
+
+
+
 
     </body>
+
 </html>
