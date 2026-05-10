@@ -1,0 +1,353 @@
+/* ============================================================
+   Barangay Tugtug E-System — Analytics Page Styles
+   File: cssfile/Analytics.css
+   ============================================================ */
+
+/* ── Analytics sidebar nav item ── */
+.analytics-container {
+    position: relative;
+    top: 21vh;
+    left: 1vw;
+    width: 3.4vw;
+    height: 6vh;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.analytics-container:hover,
+.analytics-active {
+    background-color: rgb(145, 124, 5);
+}
+
+.sidebar-container:hover .analytics-container {
+    position: relative;
+    bottom: 4vh;
+    left: 1vw;
+    width: 200vw;
+    height: 6vh;
+    cursor: pointer;
+}
+
+.Analytics-btn {
+    background-color: transparent;
+    border-color: transparent;
+    position: relative;
+    top: 10%;
+    left: 8%;
+    cursor: pointer;
+}
+
+.analytics-icon {
+    color: antiquewhite;
+    font-size: 2vw;
+}
+
+.Analytics-word {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: -100vw;
+    font-size: 0;
+    color: rgb(205, 205, 181);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: 0.1s ease-in-out 0.003s;
+}
+
+.sidebar-container:hover .Analytics-word {
+    position: relative;
+    bottom: 80%;
+    left: 5vw;
+    font-size: 2vh;
+    cursor: pointer;
+}
+
+
+/* ── Main Layout ── */
+.analytics-main {
+    position: absolute;
+    top: 10vh;
+    left: 7vw;
+    right: 0;
+    width: auto;
+    min-height: calc(100vh - 10vh);
+    padding: 3vh 3vw 6vh 3vw;
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+
+/* ── Analytics Card ── */
+.analytics-card {
+    background-color: #fcfaf7;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    border: 1px solid rgba(209,170,87,0.3);
+    padding: 2.5vh 2.5vw;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ── Card Header ── */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5vh;
+    margin-bottom: 2.5vh;
+    padding-bottom: 1.5vh;
+    border-bottom: 2px solid rgba(55, 83, 9, 0.15);
+}
+
+.card-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.card-icon {
+    font-size: 3vh;
+    color: #375309;
+}
+
+.card-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 3.2vh;
+    color: #375309;
+    margin: 0;
+    font-weight: 700;
+}
+
+
+/* ── Controls ── */
+.card-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+    flex-wrap: wrap;
+}
+
+.ctrl-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.5vh;
+    font-weight: 600;
+    color: #375309;
+}
+
+.ctrl-select {
+    background: #f3efe8;
+    border: 1.5px solid #7d9e3b;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #273b07;
+    font-size: 1.5vh;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.ctrl-select:hover,
+.ctrl-select:focus {
+    border-color: #375309;
+    background: #e8e3d9;
+}
+
+.ctrl-btn {
+    background: #375309;
+    color: #f3efe8;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 18px;
+    font-size: 1.5vh;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+}
+
+.ctrl-btn:hover {
+    background: #7d9e3b;
+    transform: translateY(-1px);
+}
+
+.ctrl-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ── Chart Area ── */
+.chart-area {
+    position: relative;
+    width: 100%;
+    min-height: 38vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5vh;
+    color: #7a8c6a;
+    text-align: center;
+    padding: 4vh 2vw;
+}
+
+.placeholder-icon {
+    font-size: 8vh;
+    opacity: 0.25;
+    color: #375309;
+}
+
+.chart-placeholder p {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.8vh;
+    color: #5a6b4a;
+    max-width: 40vw;
+}
+
+#docChart,
+#blotterChart {
+    width: 100% !important;
+    max-height: 42vh;
+}
+
+/* Loading spinner */
+.chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2vw;
+    color: #375309;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 2vh;
+    padding: 6vh 0;
+}
+
+.spinner {
+    width: 3.5vh;
+    height: 3.5vh;
+    border: 3px solid rgba(55,83,9,0.2);
+    border-top-color: #375309;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Empty state */
+.chart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2vh;
+    color: #7a8c6a;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.8vh;
+    padding: 5vh 0;
+}
+
+.chart-empty i {
+    font-size: 6vh;
+    opacity: 0.3;
+}
+
+
+/* ── Summary Row ── */
+.summary-row {
+    display: flex;
+    gap: 1.5vw;
+    flex-wrap: wrap;
+    margin-top: 2vh;
+    padding-top: 1.5vh;
+    border-top: 1px solid rgba(55,83,9,0.12);
+}
+
+.summary-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f3efe8;
+    border-radius: 12px;
+    padding: 1.2vh 2vw;
+    min-width: 10vw;
+    border: 1.5px solid transparent;
+    transition: 0.2s;
+}
+
+.summary-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.chip-label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.3vh;
+    font-weight: 600;
+    color: #6b7c5a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chip-value {
+    font-family: 'Crimson Text', serif;
+    font-size: 3.5vh;
+    font-weight: 700;
+    margin-top: 0.3vh;
+    color: #273b07;
+}
+
+/* Color variants */
+.total-chip      { border-color: #375309;  }
+.total-chip .chip-value { color: #375309; }
+
+.top-chip        { border-color: #7d9e3b;  }
+.top-chip .chip-value { color: #5a7a20; font-size: 2.2vh; }
+
+.resolved-chip   { border-color: #198754;  }
+.resolved-chip .chip-value { color: #0a5c38; }
+
+.escalated-chip  { border-color: #dc3545;  }
+.escalated-chip .chip-value { color: #9b1c2a; }
+
+.pending-chip    { border-color: #ffc107;  }
+.pending-chip .chip-value { color: #8a6a00; }
+
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .analytics-main {
+        left: 6vw;
+        padding: 1.5vh 1.5vw;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-controls {
+        width: 100%;
+    }
+
+    .summary-chip {
+        min-width: 38%;
+    }
+}
+
+.dismissed-chip  { border-color: #6c757d;  }
+.dismissed-chip .chip-value { color: #3d4449; }
